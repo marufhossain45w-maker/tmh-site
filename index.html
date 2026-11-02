@@ -3,223 +3,166 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TMH Technology – Tech Resource Platform</title>
-<meta name="description" content="TMH Technology – অ্যাপ, PNG, এডিটিং রিসোর্স, ফন্ট ও টিউটোরিয়াল এক জায়গায়।">
-<meta property="og:title" content="TMH Technology"><meta property="og:type" content="website"><meta name="theme-color" content="#e11d2e"><meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="TMH Technology – অ্যাপ, PNG, ফন্ট, ওয়ালপেপার, টেমপ্লেট এবং এডিটিং রিসোর্স এক জায়গায়।">
+<meta property="og:title" content="TMH Technology"><meta property="og:type" content="website">
+<meta name="theme-color" content="#e11d2e">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch(e){}</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js"></script>
 <style>
-:root{--red:#e11d2e;--red2:#ff4d5a;--bg:#f6f3f3;--ink:#16161a;--mut:#6b6b76;--g:rgba(255,255,255,.55);--gb:rgba(255,255,255,.75);--sh:0 8px 30px rgba(120,20,30,.12);--r:22px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d0d10;--ink:#f3f3f5;--mut:#a0a0ab;--g:rgba(40,40,48,.5);--gb:rgba(255,255,255,.16);--sh:0 8px 30px rgba(0,0,0,.5)}}
-:root[data-theme=dark]{--bg:#0d0d10;--ink:#f3f3f5;--mut:#a0a0ab;--g:rgba(40,40,48,.5);--gb:rgba(255,255,255,.16);--sh:0 8px 30px rgba(0,0,0,.5)}
-*{box-sizing:border-box;margin:0}html{scroll-padding-top:90px;scroll-behavior:smooth}
-body{font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);transition:background .3s,color .3s;min-height:100vh;overflow-x:clip}
-body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(70px);pointer-events:none}
-body::before{width:420px;height:420px;background:#ff3b4a;opacity:.35;top:-80px;right:-60px}
-body::after{width:380px;height:380px;background:#ff8a94;opacity:.3;bottom:10%;left:-90px}
-button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}a{color:inherit;text-decoration:none}
+:root{--red:#e11d2e;--red2:#ff4d5a;--ink:#1b1b22;--mut:#6f6f7c;--bg:#fbe9ec;--g:rgba(255,255,255,.5);--gb:rgba(255,255,255,.85);--sh:0 10px 30px rgba(190,30,60,.18);--cd:rgba(255,255,255,.55)}
+:root[data-theme=dark]{--ink:#f4f4f7;--mut:#a3a3b0;--bg:#110a0d;--g:rgba(50,36,42,.5);--gb:rgba(255,255,255,.16);--sh:0 10px 30px rgba(0,0,0,.5);--cd:rgba(255,255,255,.07)}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;color:var(--ink);max-width:480px;margin:auto;padding:max(12px,env(safe-area-inset-top)) 12px calc(118px + env(safe-area-inset-bottom));min-height:100vh;overflow-x:clip;-webkit-tap-highlight-color:transparent;background:radial-gradient(65% 38% at 88% 6%,rgba(255,50,85,.6),transparent 70%),radial-gradient(55% 34% at 2% 28%,rgba(255,140,165,.6),transparent 70%),radial-gradient(60% 40% at 92% 58%,rgba(255,80,115,.45),transparent 70%),radial-gradient(60% 40% at 5% 90%,rgba(255,120,150,.4),transparent 70%),var(--bg);background-attachment:fixed}
+button,input,select{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--red2);outline-offset:2px}
-/* Liquid glass */
-.glass{background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.04)) ,var(--g);backdrop-filter:blur(26px) saturate(190%) brightness(1.04);-webkit-backdrop-filter:blur(26px) saturate(190%) brightness(1.04);border:1px solid var(--gb);box-shadow:var(--sh),inset 0 1.5px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.2),inset 0 0 18px rgba(255,255,255,.12);border-radius:var(--r);position:relative}
-:root[data-theme=dark] .glass{box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.3),inset 0 0 18px rgba(255,255,255,.04)}
-.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(120% 60% at 20% 0,rgba(255,255,255,.35),transparent 55%);pointer-events:none;opacity:.6}
-.btn{background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;border-radius:999px;padding:9px 18px;font-weight:700;box-shadow:0 6px 16px rgba(225,29,46,.4),inset 0 1.5px 0 rgba(255,255,255,.5);transition:transform .15s}
-.btn:active{transform:scale(.95)}
-header{position:sticky;top:0;z-index:50;margin:10px 12px;display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:26px}
-.logo{font-weight:900;font-size:26px;letter-spacing:-1px;line-height:1}.logo b{color:var(--red)}.logo small{display:block;font-size:9px;font-weight:600;letter-spacing:0;color:var(--mut)}
-.tag{font-size:13px;color:var(--mut);white-space:nowrap}
-.sbar{flex:1;display:flex;align-items:center;gap:6px;padding:4px 4px 4px 14px;border-radius:999px;background:rgba(255,255,255,.5);border:1px solid var(--gb);min-width:0}
-:root[data-theme=dark] .sbar{background:rgba(255,255,255,.08)}
-.sbar input{flex:1;border:0;background:none;outline:0;font:inherit;color:var(--ink);min-width:0;padding:6px 0}
-.ib{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:18px;flex:none;transition:background .2s}.ib:hover{background:rgba(225,29,46,.12)}
-.hide-m{display:flex;gap:2px}
-.wrap{display:grid;grid-template-columns:210px 1fr 300px;gap:16px;padding:6px 12px 90px;max-width:1500px;margin:auto}
-aside nav{position:sticky;top:84px;display:grid;gap:4px;padding:12px}
-aside a{display:flex;gap:10px;padding:10px 12px;border-radius:14px;font-size:14px;font-weight:500;transition:background .2s}
-aside a:hover{background:rgba(225,29,46,.1)}aside a.on{background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;box-shadow:0 6px 16px rgba(225,29,46,.35)}
-.promo{margin-top:12px;padding:14px;text-align:center;font-size:13px}.promo h4{margin:4px 0}
-main{min-width:0;display:grid;gap:16px;align-content:start}
-.hero{padding:34px;color:#fff;overflow:hidden;background:linear-gradient(120deg,rgba(10,10,12,.92),rgba(150,10,25,.85));min-height:300px}
-.hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;font-weight:800}.hero h1 span{color:#ff4150;display:block}
-.hero p{margin:12px 0 18px;max-width:440px;opacity:.9;font-size:14px}
-.chip{display:inline-block;padding:5px 12px;margin:4px 4px 0 0;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);font-size:12px;color:#fff}
-.hero .sbar{background:rgba(255,255,255,.95);max-width:440px;border:2px solid var(--red)}.hero .sbar input{color:#222}
-.phone{position:absolute;right:6%;top:24px;width:150px;height:260px;border-radius:30px;background:linear-gradient(160deg,#222,#000);border:3px solid #444;display:grid;place-items:center;font-weight:900;font-size:30px;box-shadow:0 0 60px rgba(255,40,60,.6);transform:rotate(6deg)}
-.phone b{color:#ff3b4a}
-.sec{padding:16px}.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sh h2{font-size:17px}.sh a{color:var(--red);font-size:13px;font-weight:600}
-.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
-.cat{padding:14px 8px;text-align:center;border-radius:18px;background:rgba(255,255,255,.35);border:1px solid var(--gb);font-size:13px;font-weight:600;transition:transform .2s,box-shadow .2s}
-:root[data-theme=dark] .cat{background:rgba(255,255,255,.06)}
-.cat:hover,.cat.on{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--red2)}.cat i{display:block;font-style:normal;font-size:30px;margin-bottom:4px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
-.card{border-radius:18px;overflow:hidden;background:rgba(255,255,255,.4);border:1px solid var(--gb);transition:transform .2s;animation:in .4s both}
-:root[data-theme=dark] .card{background:rgba(255,255,255,.06)}.card:hover{transform:translateY(-3px)}
+.i{width:1.2em;height:1.2em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em;flex:none}
+.glass{position:relative;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.35),rgba(255,255,255,.05)),var(--g);backdrop-filter:blur(24px) saturate(190%);-webkit-backdrop-filter:blur(24px) saturate(190%);border:1px solid var(--gb);box-shadow:var(--sh),inset 0 1.5px 0 rgba(255,255,255,.9),inset 0 0 20px rgba(255,255,255,.14)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(120% 55% at 18% 0,rgba(255,255,255,.4),transparent 55%);pointer-events:none}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}.lg{width:76px;height:76px;border-radius:50%;object-fit:cover;box-shadow:0 6px 20px rgba(225,29,46,.55)}
+.bt{flex:1;font-size:27px;font-weight:800;line-height:1;letter-spacing:-.5px}
+.cb{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:21px}.cb .i{width:22px;height:22px}.dot{position:absolute;top:8px;right:9px;width:11px;height:11px;border-radius:50%;background:#ff2d4a;border:2px solid #fff;display:none}
+.tr{display:flex;align-items:center;gap:8px;padding:11px 14px;margin-bottom:12px;font-size:13px;border-radius:999px}.tr .i{color:#ff3b1f;width:20px;height:20px}.tr span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hero{padding:20px 16px 16px;margin-bottom:12px;overflow:visible}.hero h1{font-size:34px;line-height:1.05;font-weight:800;letter-spacing:-1px}.hero h1 b{color:var(--red)}
+.hero .hx{width:64%}.hero h2{font-size:15px;font-weight:700;margin:6px 0 6px;line-height:1.25}.hero p{font-size:12.5px;color:var(--mut);line-height:1.4;margin-bottom:14px}
+.ph{position:absolute;right:6px;top:-18px;width:112px;height:196px;border-radius:24px;transform:rotate(7deg);background:radial-gradient(circle at 70% 25%,#ff4a64,#7a0b1c 55%,#1a0509);border:3px solid #2b2b30;box-shadow:0 14px 34px rgba(190,20,50,.5);color:#fff;text-align:center;overflow:hidden}.ad{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:0 6px}.ad em{position:absolute;top:10px;left:0;right:0;font-size:9px;font-style:normal;letter-spacing:.6px;opacity:.9}.yp{width:48px;height:34px;border-radius:10px;background:#ff0033;display:grid;place-items:center;box-shadow:0 6px 14px rgba(0,0,0,.4)}.ad small{font-size:10px;opacity:.85}
+.sb{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 14px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid #fff;box-shadow:inset 0 1px 0 #fff,0 6px 16px rgba(190,30,60,.12);color:#222}
+:root[data-theme=dark] .sb{background:rgba(255,255,255,.12);color:var(--ink)}.sb input{flex:1;min-width:0;border:0;background:none;outline:0;padding:8px 0}
+.go{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(180deg,var(--red2),var(--red));box-shadow:0 6px 14px rgba(225,29,46,.45),inset 0 1.5px 0 rgba(255,255,255,.5)}
+.cs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px 8px;margin-bottom:12px}
+.ct{display:grid;justify-items:center;gap:5px;font-size:12px;font-weight:700;padding:6px 0;border-radius:16px}.ct.on{background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1.5px var(--red2)}
+.tile{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(155deg,rgba(255,255,255,.45),transparent 55%),var(--c);box-shadow:0 8px 16px -4px var(--c),inset 0 2px 0 rgba(255,255,255,.6),inset 0 -6px 10px rgba(0,0,0,.18)}.tile .i{width:26px;height:26px;stroke-width:2.2}
+.sec{padding:14px 12px;margin-bottom:12px}.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}.sh h2{font-size:19px;display:flex;align-items:center;gap:8px}.sh h2 .i{color:var(--red)}.sh a{color:var(--red);font-weight:700;font-size:13px}
+.sel{border-radius:999px;padding:6px 10px;border:1px solid var(--gb);background:var(--g);color:var(--ink);font-size:13px;display:none}
+#grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}body[data-m=home] #grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.cd{position:relative;min-width:0;padding:12px 8px 10px;border-radius:20px;text-align:center;background:var(--cd);border:1px solid var(--gb);box-shadow:inset 0 1px 0 rgba(255,255,255,.8);scroll-snap-align:start;animation:in .4s both}body[data-m=home] .cd{flex:0 0 140px}
 @keyframes in{from{opacity:0;transform:translateY(8px)}}
-.th{height:110px;display:grid;place-items:center;font-size:40px;font-weight:900;color:#fff}
-.cb{padding:10px}.cb h3{font-size:14px;margin-bottom:5px}.tg{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;background:rgba(225,29,46,.12);color:var(--red);margin-right:4px}
-.meta{font-size:12px;color:var(--mut);margin:6px 0}.row{display:flex;gap:6px;align-items:center}.row .btn{flex:1;padding:7px}
-.heart{width:34px;height:34px;border-radius:12px;border:1px solid var(--gb);background:rgba(255,255,255,.4);font-size:16px}.heart.on{color:var(--red)}
-.banner{padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;color:#fff;background:linear-gradient(100deg,rgba(225,29,46,.95),rgba(255,90,100,.8))}
-.banner h3{font-size:22px}.banner .btn{background:#fff;color:var(--red);box-shadow:none}
-.li{display:flex;align-items:center;gap:10px;padding:9px;border-radius:14px;font-size:13px;cursor:pointer}.li:hover{background:rgba(225,29,46,.08)}
-.li .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}.li small{display:block;color:var(--mut);font-size:11px}
-.right{display:grid;gap:16px;align-content:start}.empty{text-align:center;color:var(--mut);padding:24px;font-size:14px}
-footer{margin:0 12px 90px;padding:20px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:13px}
-footer nav{display:flex;gap:16px;flex-wrap:wrap}.soc a{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;margin-right:6px;font-size:11px;font-weight:700}
-.adv{text-align:center;font-size:11px;color:var(--mut);padding:14px;border:1px dashed var(--mut);border-radius:14px}
-.bn{display:none;position:fixed;bottom:10px;left:10px;right:10px;z-index:60;justify-content:space-around;padding:8px;border-radius:28px}
-.bn button{display:grid;font-size:11px;gap:2px;justify-items:center;padding:4px 10px}
-#toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,20px);padding:10px 18px;border-radius:999px;opacity:0;transition:.3s;z-index:99;pointer-events:none;font-size:14px}#toast.s{opacity:1;transform:translate(-50%,0)}
-@media(max-width:1100px){.wrap{grid-template-columns:1fr}aside,.right .pop{display:none}.right{order:3}.bn{display:flex}.tag,.hide-m{display:none}.stage{display:none}}
-.i{width:1.15em;height:1.15em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em;flex:none}.heart.on .i{fill:currentColor}.soc a .i{width:18px;height:18px}.empty .i{width:34px;height:34px;display:block;margin:0 auto 6px}.promo>.i{width:30px;height:30px;color:var(--red)}
-.tile{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;margin:0 auto 8px;color:#fff;background:linear-gradient(155deg,rgba(255,255,255,.4),transparent 55%),var(--tg);box-shadow:0 12px 22px -6px var(--tc),inset 0 2px 0 rgba(255,255,255,.6),inset 0 -7px 12px rgba(0,0,0,.2)}.tile .i{width:28px;height:28px;stroke-width:2.2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
-.fl{position:absolute;margin:0;width:48px;height:48px;border-radius:15px;animation:fy 4s ease-in-out infinite}@keyframes fy{50%{transform:translateY(-10px)}}
-.stage{position:absolute;right:2%;top:14px;width:290px;height:280px}.stage .phone{right:auto;left:70px;top:0;height:270px;width:150px}.stage .phone small{display:block;font-size:11px;font-weight:600;color:#ddd}
-@media(max-width:1350px) and (min-width:1101px){.stage{display:none}}
-.fsf{margin-top:14px;font-size:13px;opacity:.9;display:flex;gap:14px}.fsf span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ff4150;margin-right:6px}
-.th{position:relative;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--tc) 50%,#000),#050507 78%);cursor:pointer}.logo2{width:66px;height:66px;border-radius:21px;display:grid;place-items:center;font-size:32px;font-weight:900;color:#fff;box-shadow:0 0 34px var(--tc),inset 0 2px 0 rgba(255,255,255,.5);background:linear-gradient(155deg,rgba(255,255,255,.35),transparent 55%),var(--tc)}
-.strip{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.strip .card{min-width:160px;scroll-snap-align:start}
-.card.sk{animation:skm 1.2s infinite;height:200px;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%) 0 0/200% 100%,rgba(0,0,0,.07)}@keyframes skm{to{background-position:-200% 0}}
+.bk{position:absolute;top:8px;right:8px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%}.bk.on{color:var(--red)}.bk.on .i{fill:currentColor}
+.ic2{width:66px;height:66px;margin:0 auto 8px;border-radius:19px;overflow:hidden;cursor:pointer;display:grid;place-items:center;background:var(--c);box-shadow:0 8px 18px -6px var(--c),inset 0 2px 0 rgba(255,255,255,.5)}.ic2 img{width:100%;height:100%;object-fit:cover}.ic2 span{color:#fff;font-size:30px;font-weight:900}
+.cd h3{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cd small{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mt{font-size:11px;color:var(--mut);margin:6px 0;display:flex;align-items:center;justify-content:center;gap:4px}.mt .i{color:#22a559}
+.dlb{width:100%;padding:8px;border-radius:999px;font-weight:700;font-size:13px;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,190,205,.7));border:1px solid #fff;box-shadow:0 4px 10px rgba(225,29,46,.2),inset 0 1px 0 #fff}.dlb:active{transform:scale(.96)}
+.empty{grid-column:1/-1;text-align:center;color:var(--mut);padding:26px 10px;font-size:14px}.empty .i{width:34px;height:34px;display:block;margin:0 auto 6px}
+.more{display:none;margin:12px auto 0;padding:10px 22px;border-radius:999px;background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;font-weight:700}
+.bnr{display:flex;align-items:center;gap:12px;padding:16px;margin-bottom:12px;color:#fff;background:linear-gradient(110deg,rgba(225,29,46,.95),rgba(255,90,110,.85))}.bnr .big{width:54px;height:54px;border-radius:50%;background:#2aa3e8;display:grid;place-items:center;flex:none;box-shadow:0 6px 16px rgba(0,0,0,.25)}.bnr .big .i{width:28px;height:28px}
+.bnr div{flex:1}.bnr small{opacity:.9;font-size:13px}.bnr b{display:block;font-size:20px;line-height:1.15}.bnr a{background:#fff;color:#111;border-radius:999px;padding:9px 14px;font-weight:800;font-size:13px;white-space:nowrap}
+.adv{text-align:center;font-size:11px;color:var(--mut);padding:12px;border:1px dashed var(--mut);border-radius:16px;margin-bottom:12px}
+body:not([data-m=home]) .hm{display:none}body[data-m=saved] .nx,body[data-m=recent] .nx,body[data-m=dl] .nx{display:none}body:not([data-m=home]):not([data-m=explore]) .ex{display:none}
+.bn{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(456px,calc(100% - 20px));display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:end;padding:8px 6px 6px;border-radius:30px;z-index:30}
+.bn button{display:grid;justify-items:center;gap:2px;font-size:12px;color:var(--mut);padding:4px 0;position:relative}.bn button .i{width:25px;height:25px}.bn button.on{color:var(--red);font-weight:700}.bn button.on::after{content:"";position:absolute;bottom:-6px;width:28px;height:3px;border-radius:3px;background:var(--red)}
+.bn .mn{color:var(--ink);font-weight:600}.bn .mn span{width:64px;height:64px;border-radius:50%;margin-top:-34px;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 35% 25%,#ff7a8a,var(--red) 60%,#a30f1f);box-shadow:0 10px 24px rgba(225,29,46,.55),inset 0 2px 0 rgba(255,255,255,.5);border:3px solid rgba(255,255,255,.8)}.bn .mn .i{width:30px;height:30px}
 #ov{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:70;display:none}#ov.s{display:block}
-#sh2{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:min(560px,100%);z-index:80;max-height:88vh;overflow:auto;padding:20px;border-radius:30px 30px 0 0;transition:transform .35s cubic-bezier(.2,.9,.3,1)}#sh2.s{transform:translate(-50%,0)}
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.ig div{padding:10px;border-radius:14px;background:rgba(255,255,255,.35);border:1px solid var(--gb);font-weight:600;font-size:14px}.ig small{display:block;color:var(--mut);font-weight:400;font-size:11px}
-.fab{position:fixed;right:14px;bottom:96px;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;z-index:55;color:#22a559}.fab .i{width:26px;height:26px}
-@media(max-width:700px){.cats{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.cat{min-width:104px;scroll-snap-align:start}.hero{padding:22px}}
-body{max-width:480px;margin:0 auto;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:contain}
-button,.card,.li,.cat{user-select:none;-webkit-user-select:none}
-header{margin:8px 10px}header .sbar{display:none}header .logo{margin-right:auto}
-.wrap{grid-template-columns:minmax(0,1fr);max-width:none;padding:4px 10px 120px;width:100%}main,.right{grid-template-columns:minmax(0,1fr);min-width:0;width:100%}.sec,.hero,.banner,.adv{min-width:0;max-width:100%}.cats,.strip{max-width:100%}aside,.stage,.tag,.hide-m{display:none}.right .pop{display:block}.right{order:3}
-.hero{padding:22px;min-height:0;background:radial-gradient(circle at 88% 12%,rgba(255,60,75,.6),transparent 55%),linear-gradient(120deg,rgba(10,10,12,.92),rgba(150,10,25,.85))}.hero h1{font-size:30px}
-.th::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 45%);pointer-events:none}
-.bn{display:flex;left:50%;right:auto;transform:translateX(-50%);width:min(460px,calc(100% - 20px))}.bn button{color:var(--mut);transition:color .2s,transform .15s}.bn button.on{color:var(--red);font-weight:700;transform:translateY(-2px)}.bn button .i{width:22px;height:22px}
-.fab{right:max(14px,calc(50% - 226px));bottom:104px}
-body:not([data-m=home]) main>section:not(#res),body:not([data-m=home]) main>.adv,body:not([data-m=home]) .right{display:none}
-footer{display:none}
-.mb{padding:6px 11px;border-radius:999px;border:1px solid var(--gb);background:rgba(255,255,255,.45);font-size:12px;font-weight:600;cursor:pointer}.fi{display:block;width:100%;padding:11px 13px;border-radius:14px;border:1px solid var(--gb);background:rgba(255,255,255,.55);color:var(--ink);font:inherit;margin-bottom:8px}:root[data-theme=dark] .fi,:root[data-theme=dark] .mb{background:rgba(255,255,255,.08)}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js"></script><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest"></head>
-<body>
+#sh2{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:min(480px,100%);z-index:80;max-height:88vh;overflow:auto;padding:18px 14px calc(18px + env(safe-area-inset-bottom));border-radius:30px 30px 0 0;transition:transform .35s cubic-bezier(.2,.9,.3,1)}#sh2.s{transform:translate(-50%,0)}
+.sx{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sx h2{font-size:21px}.xb{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--cd);border:1px solid var(--gb)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mi{display:flex;align-items:center;gap:10px;padding:11px 10px;border-radius:18px;background:var(--cd);border:1px solid var(--gb);text-align:left;min-width:0}.mi .i{width:26px;height:26px}.mi b{display:block;font-size:14px}.mi small{display:block;font-size:11px;color:var(--mut)}
+.tg2{width:42px;height:24px;border-radius:99px;background:#9aa;position:relative;margin-left:auto;flex:none}.tg2::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}:root[data-theme=dark] .tg2{background:var(--red)}:root[data-theme=dark] .tg2::after{left:20px}
+.li{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;font-size:14px;background:var(--cd);margin-bottom:6px}.li small{display:block;color:var(--mut);font-size:11px}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.ig div{padding:10px;border-radius:14px;background:var(--cd);border:1px solid var(--gb);font-weight:600;font-size:14px}.ig small{display:block;color:var(--mut);font-weight:400;font-size:11px}
+.btn{background:linear-gradient(180deg,var(--red2),var(--red));color:#fff;border-radius:999px;padding:11px 18px;font-weight:700;box-shadow:0 6px 16px rgba(225,29,46,.4)}.row{display:flex;gap:8px;align-items:center}.row .btn{flex:1}.sq{width:44px;height:44px;border-radius:14px;border:1px solid var(--gb);background:var(--cd);display:grid;place-items:center}.sq.on{color:var(--red)}
+#toast{position:fixed;bottom:112px;left:50%;transform:translate(-50%,20px);padding:10px 18px;border-radius:999px;opacity:0;transition:.3s;z-index:99;pointer-events:none;font-size:14px;white-space:nowrap}#toast.s{opacity:1;transform:translate(-50%,0)}
+p.t{font-size:14px;line-height:1.6;margin-bottom:10px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></symbol>
-<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.300 21a2 2 0 0 0 3.400 0"/></symbol>
-<symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.500-1.500 3-3.200 3-5.500A5.500 5.500 0 0 0 16.500 3c-1.800 0-3 .5-4.500 2-1.500-1.500-2.700-2-4.500-2A5.500 5.500 0 0 0 2 8.500c0 2.300 1.500 4 3 5.500l7 7Z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10.5 9-7.5 9 7.5V21H3z"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 8-2 6-6 2 2-6z"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
 <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a2 2 0 0 0 3.4 0"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
-<symbol id="i-crown" viewBox="0 0 24 24"><path d="m2 8 5 4 5-7 5 7 5-4-2 11H4L2 8Z"/></symbol>
-<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.100 6.300 6.900 1-5 4.800 1.200 6.900-6.200-3.200-6.200 3.200L7 14.100 2 9.300l6.900-1L12 2Z"/></symbol>
-<symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.500 14.500A2.500 2.500 0 0 0 11 12c0-1.400-.5-2-1-3-1.100-2.200-.2-4.100 2-6 .5 2.500 2 4.900 4 6.500 2 1.600 3 3.500 3 5.500a7 7 0 1 1-14 0c0-1.200.4-2.400 1-3 0 1.400 1 2.500 2.500 2.500Z"/></symbol>
-<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
-<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10.500 9-7.500 9 7.500V21H3V10.500Z"/></symbol>
-<symbol id="i-apps" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
-<symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="3"/><path d="m22 8-6 4 6 4V8Z"/></symbol>
-<symbol id="i-android" viewBox="0 0 24 24"><path d="M5 11a7 7 0 0 1 14 0v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8ZM8 4l1.500 2.500M16 4l-1.500 2.500M9 11h.01M15 11h.01"/></symbol>
-<symbol id="i-wallpaper" viewBox="0 0 24 24"><path d="m3 20 6-11 4 6 3-4 5 9H3Z"/><circle cx="17" cy="6" r="2"/></symbol>
-<symbol id="i-font" viewBox="0 0 24 24"><path d="m4 20 8-16 8 16M7.500 14h9"/></symbol>
-<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.500A2.500 2.500 0 0 1 6.500 17H20V3H6.500A2.500 2.500 0 0 0 4 5.500v14ZM20 17v4H6.500"/></symbol>
-<symbol id="i-news" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h10M7 16h5"/></symbol>
-<symbol id="i-template" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.8 1.2 6.9-6.2-3.2-6.2 3.2L7 14.1 2 9.3l6.9-1L12 2Z" style="fill:currentColor"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.2-.2-4.1 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.4 1-3 0 1.4 1 2.5 2.5 2.5Z" style="fill:currentColor"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></symbol>
+<symbol id="i-android" viewBox="0 0 24 24"><path d="M5 11a7 7 0 0 1 14 0v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8ZM8 4l1.5 2.5M16 4l-1.5 2.5M9 11h.01M15 11h.01"/></symbol>
 <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></symbol>
-<symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="m3 21 1.700-5A9 9 0 1 1 8 19.300L3 21Z"/><path d="M9 9c0 3 3 6 6 6l1-1.500-2-1-1 .7c-1-.4-1.800-1.200-2.200-2.200l.7-1-1-2L9 9Z"/></symbol>
-<symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></symbol>
-<symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M16 3c.3 2.300 1.700 3.700 4 4v3a7 7 0 0 1-4-1.300V15a6 6 0 1 1-6-6v3.200A3 3 0 1 0 13 15V3h3Z"/></symbol>
-<symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-<symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10ZM9 12l2 2 4-4"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7h.01"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></symbol>
+<symbol id="i-set" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+<symbol id="i-font" viewBox="0 0 24 24"><path d="m4 20 8-16 8 16M7.5 14h9"/></symbol>
+<symbol id="i-wall" viewBox="0 0 24 24"><path d="m3 20 6-11 4 6 3-4 5 9H3Z"/><circle cx="17" cy="6" r="2"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="4"/><path d="m10 9 5 3-5 3V9Z" style="fill:currentColor"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="m3 21 1.7-5A9 9 0 1 1 8 19.3L3 21Z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 .7c-1-.4-1.800-1.200-2.200-2.200l.7-1-1-2L9 9Z"/></symbol>
+<symbol id="i-yt" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z" style="fill:currentColor"/></symbol>
+<symbol id="i-tt" viewBox="0 0 24 24"><path d="M16 3c.3 2.3 1.700 3.700 4 4v3a7 7 0 0 1-4-1.300V15a6 6 0 1 1-6-6v3.200A3 3 0 1 0 13 15V3h3Z"/></symbol>
 <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2M5.500 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6l3.500-7Z"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></symbol>
 </defs></svg>
-<header class="glass">
-<button class="ib" aria-label="Menu" onclick="menu()"><svg class="i"><use href="#i-menu"/></svg></button>
-<a class="logo" href="#"><b>TMH</b><small>Technology</small></a>
-<span class="tag">প্রযুক্তি হোক সবার জন্য সহজ <b style="color:var(--red)"><svg class="i"><use href="#i-heart"/></svg></b></span>
-<div class="sbar"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="আপনার পছন্দের কিছু খুঁজুন..." aria-label="Search" oninput="render()"><button class="btn" style="padding:7px 14px" onclick="document.getElementById('res').scrollIntoView()">খুঁজুন</button></div>
-<div class="hide-m"><button class="ib" aria-label="Notifications" onclick="toast('নতুন কোনো আপডেট নেই')"><svg class="i"><use href="#i-bell"/></svg></button><button class="ib" aria-label="Saved" onclick="view('saved')"><svg class="i"><use href="#i-heart"/></svg></button><button class="ib" aria-label="Downloads" onclick="view('dl')"><svg class="i"><use href="#i-download"/></svg></button></div>
-<button class="ib" aria-label="Search" onclick="view('home');setTimeout(()=>document.querySelector('.hero input').focus(),300)"><svg class="i"><use href="#i-search"/></svg></button><button class="ib" id="tm" aria-label="Theme" onclick="theme()"><svg class="i"><use href="#i-moon"/></svg></button>
-</header>
-<div class="wrap">
-<aside><nav class="glass" id="nav"></nav>
-<div class="promo glass"><svg class="i" style="width:30px;height:30px;color:var(--red)"><use href="#i-crown"/></svg><h4>Premium Resources</h4><p style="color:var(--mut)">এক্সক্লুসিভ PNG, Template, Preset এবং আরও অনেক কিছু!</p><button class="btn" style="margin-top:10px" onclick="document.getElementById('res').scrollIntoView()">Explore Now</button></div></aside>
+<header class="hd"><img class="lg" src="logo.png" alt="TMH Technology"><div class="bt">TMH<br>Technology</div><button class="cb glass" aria-label="Notifications" onclick="note()"><svg class="i"><use href="#i-bell"/></svg><i class="dot" id="dot"></i></button><button class="cb glass" aria-label="Theme" onclick="theme()"><svg class="i"><use href="#i-moon"/></svg></button></header>
 <main>
-<section class="hero glass"><div class="stage"><div class="phone"><span><b>TMH</b><small>Technology</small></span></div><span class="tile fl" style="--tg:#e11d2e;--tc:#e11d2e;top:30px;left:0"><svg class="i"><use href="#i-youtube"/></svg></span><span class="tile fl" style="--tg:#22a559;--tc:#22a559;top:120px;left:-10px;animation-delay:-1s"><svg class="i"><use href="#i-android"/></svg></span><span class="tile fl" style="--tg:#2aa3e8;--tc:#2aa3e8;top:60px;right:0;animation-delay:-2s"><svg class="i"><use href="#i-send"/></svg></span><span class="tile fl" style="--tg:#ec4899;--tc:#ec4899;top:170px;right:8px;animation-delay:-3s"><svg class="i"><use href="#i-video"/></svg></span></div>
-<span class="chip" style="margin:0 0 12px"><svg class="i"><use href="#i-star"/></svg> Welcome to TMH Technology</span>
-<h1>Your One Stop <span>Tech Resource Platform</span></h1>
-<p>এখানে পাবেন সব ধরনের অ্যাপ, সফটওয়্যার, PNG, এডিটিং রিসোর্স, ফাইল, টিউটোরিয়াল এবং আরও অনেক কিছু!</p>
-<div class="sbar"><svg class="i"><use href="#i-search"/></svg><input type="search" placeholder="আপনার পছন্দের কিছু খুঁজুন..." oninput="q.value=this.value;render()" onkeydown="if(event.key=='Enter')document.getElementById('res').scrollIntoView({behavior:'smooth'})"><button class="btn" style="padding:7px 14px" aria-label="Search" onclick="document.getElementById('res').scrollIntoView({behavior:'smooth'})"><svg class="i"><use href="#i-search"/></svg></button></div>
-<div id="chips" style="margin-top:12px"></div><div class="fsf"><span>Fast</span><span>Secure</span><span>Free</span></div></section>
-<section class="sec glass"><div class="sh"><h2><svg class="i" style="color:var(--red)"><use href="#i-flame"/></svg> Browse by Category</h2><a href="#" onclick="setCat('All');return false">সমস্ত ক্যাটাগরি দেখুন</a></div><div class="cats" id="cats"></div></section>
-<section class="sec glass" id="res"><div class="sh"><h2 id="rt"></h2><select id="ft" onchange="render()" style="border-radius:999px;padding:6px 10px;border:1px solid var(--gb);background:var(--g);color:var(--ink)"><option value="">সব ফাইল টাইপ</option><option>APK</option><option>PNG</option><option>ZIP</option><option>MP4</option><option>Font</option></select></div><div class="grid" id="grid"></div><button class="btn" id="more" style="display:block;margin:14px auto 0" onclick="lim+=8;render()">Load More</button></section>
-<section class="banner glass"><div><h3>সব আপডেট সবার আগে!</h3><p style="font-size:13px;opacity:.95">আমাদের Telegram চ্যানেলে যোগ দিন এবং নতুন রিসোর্স, আপডেট ও টিপস পেতে থাকুন।</p></div><a class="btn" href="https://t.me/TMHTechnology" target="_blank" rel="noopener"><svg class="i"><use href="#i-send"/></svg> Join Now</a></section>
-<section class="sec glass"><div class="sh"><h2><svg class="i" style="color:var(--red)"><use href="#i-clock"/></svg> Latest Uploads</h2></div><div class="strip" id="lat"></div></section>
-<div class="adv">Advertisement – এখানে অনুমোদিত বিজ্ঞাপন বসবে</div>
+<div class="tr glass hm"><svg class="i"><use href="#i-flame"/></svg><b>Latest Upload</b><span>|</span><span id="tt">TMH Technology</span></div>
+<section class="hero glass nx ex"><div class="ph"><div class="ad" id="ad"><em>Advertisement</em><span class="yp"><svg class="i" style="fill:#fff;stroke:#fff"><use href="#i-play"/></svg></span><small>Ad space</small></div></div><div class="hx"><h1><b>TMH</b><br>Technology</h1><h2>Your One Stop Tech Resource Platform</h2><p>অ্যাপস, PNG, ফন্ট, ওয়ালপেপার, টেমপ্লেট এবং আরও অনেক কিছু – সব এক জায়গায়, সম্পূর্ণ ফ্রিতে!</p></div>
+<div class="sb"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search apps, PNG, fonts, wallpapers..." aria-label="Search" oninput="lim=8;render()" onkeydown="if(event.key=='Enter')go()"><button class="go" aria-label="Search" onclick="go()"><svg class="i"><use href="#i-arrow"/></svg></button></div></section>
+<section class="cs glass nx ex" id="cs"></section>
+<section class="sec glass" id="res"><div class="sh"><h2 id="rt"></h2><select class="sel" id="ft" onchange="lim=8;render()" aria-label="File type"><option value="">সব ফাইল টাইপ</option><option>APK</option><option>PNG</option><option>ZIP</option><option>MP4</option><option>Font</option></select><a href="#" id="va" onclick="view('explore');return false">View All <svg class="i"><use href="#i-arrow"/></svg></a></div><div id="grid"></div><button class="more" id="more" onclick="lim+=8;render()">Load More</button></section>
+<section class="bnr glass hm"><span class="big"><svg class="i"><use href="#i-send"/></svg></span><div><small>Join Our</small><b>Telegram Channel</b><small>সকল আপডেট সবার আগে!</small></div><a href="https://t.me/TMHTechnology" target="_blank" rel="noopener">Join Now <svg class="i"><use href="#i-arrow"/></svg></a></section>
+<section class="sec glass hm"><div class="sh"><h2><svg class="i"><use href="#i-clock"/></svg> Latest Uploads</h2></div><div id="lat" style="display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px"></div></section>
+<div class="adv hm">Advertisement – এখানে অনুমোদিত বিজ্ঞাপন বসবে</div>
 </main>
-<div class="right">
-<section class="sec glass"><div class="sh"><h2>Quick Access</h2></div>
-<div class="li" onclick="view('saved')"><span class="ic" style="background:var(--red)"><svg class="i"><use href="#i-heart"/></svg></span><div>My Saved<small>আপনার পছন্দের ফাইলগুলো</small></div></div>
-<div class="li" onclick="view('recent')"><span class="ic" style="background:#f97316"><svg class="i"><use href="#i-clock"/></svg></span><div>Recent View<small>সাম্প্রতিক দেখা রিসোর্স</small></div></div>
-<div class="li" onclick="view('dl')"><span class="ic" style="background:#16a34a"><svg class="i"><use href="#i-download"/></svg></span><div>Downloads<small>ডাউনলোড করা ফাইল</small></div></div>
-<div class="li" onclick="theme()"><span class="ic" style="background:#333"><svg class="i"><use href="#i-moon"/></svg></span><div>Dark Mode<small>আরামদায়ক ডার্ক থিম</small></div></div></section>
-<section class="sec glass pop"><div class="sh"><h2>Popular Downloads</h2></div><div id="pop"></div></section>
-<section class="sec glass"><div class="sh"><h2 id="vt"><svg class="i" style="color:var(--red)"><use href="#i-heart"/></svg> Saved Items</h2><a href="#" onclick="clr();return false">Clear</a></div><div id="side"></div></section>
-<section class="sec glass" style="text-align:center"><svg class="i" style="width:38px;height:38px;color:var(--red)"><use href="#i-youtube"/></svg><br><b>TMH Technology</b><p style="font-size:13px;color:var(--mut);margin:6px 0 10px">প্রযুক্তির নতুন শিখন</p><a class="btn" style="display:inline-block" href="https://youtube.com/@tmh-technology" target="_blank" rel="noopener">Subscribe on YouTube</a></section>
-</div></div>
-<footer class="glass"><div><a class="logo" href="#"><b>TMH</b><small>Technology</small></a><div class="soc" style="margin-top:8px"><a href="https://youtube.com/@tmh-technology" target="_blank" rel="noopener" aria-label="YouTube"><svg class="i"><use href="#i-youtube"/></svg></a><a href="https://t.me/TMHTechnology" target="_blank" rel="noopener" aria-label="Telegram"><svg class="i"><use href="#i-send"/></svg></a><a href="https://www.tiktok.com/@tmhtechnology" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i"><use href="#i-tiktok"/></svg></a><a href="https://wa.me/8801919565199" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a><a href="#" aria-label="Facebook" onclick="toast('Facebook পেজের লিংক এখনো যোগ করা হয়নি');return false"><svg class="i"><use href="#i-facebook"/></svg></a></div></div>
-<nav><a href="#">Home</a><a href="#">About Us</a><a href="https://wa.me/8801919565199" target="_blank" rel="noopener">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">DMCA</a></nav><small>WhatsApp: 01919565199 · © 2026 TMH Technology</small></footer>
-<div class="bn glass"><button onclick="view('home')"><svg class="i"><use href="#i-home"/></svg>Home</button><button onclick="view('saved')"><svg class="i"><use href="#i-heart"/></svg>Saved</button><button onclick="view('dl')"><svg class="i"><use href="#i-download"/></svg>Downloads</button><button onclick="menu()"><svg class="i"><use href="#i-menu"/></svg>Menu</button></div>
-<div id="ov" onclick="hide()"></div><div id="sh2" class="glass" role="dialog" aria-modal="true"></div>
-<a class="fab glass" href="https://wa.me/8801919565199" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-whatsapp"/></svg></a>
-<div id="toast" class="glass"></div>
+<nav class="bn glass" aria-label="Main"><button id="n-home" onclick="view('home')"><svg class="i"><use href="#i-home"/></svg>Home</button><button id="n-explore" onclick="view('explore')"><svg class="i"><use href="#i-compass"/></svg>Explore</button><button class="mn" onclick="menu()"><span><svg class="i"><use href="#i-grid"/></svg></span>Menu</button><button id="n-dl" onclick="view('dl')"><svg class="i"><use href="#i-download"/></svg>Downloads</button><button id="n-pf" onclick="profile()"><svg class="i"><use href="#i-user"/></svg>Profile</button></nav>
+<div id="ov" onclick="hide()"></div><div id="sh2" class="glass" role="dialog" aria-modal="true"></div><div id="toast" class="glass"></div>
 <script>
-const CATS=[["Apps & Software","📱"],["PNG & Graphics","🖼"],["Video & Audio","▶"],["Android Tools","🤖"],["Editing Resources","👑"],["Wallpaper & Themes","🌄"],["Fonts & Icons","🔤"],["Tutorials","📖"],["Blog & Tech News","📰"],["Templates & Presets","🎨"]];
-// url: put the real, permitted direct file link here. Empty = not published yet.
-const R=[{id:1,t:"CapCut Pro APK",c:"Apps & Software",ty:"APK",sz:"66 MB",col:"#111",url:""},{id:2,t:"PNG Pack (HD)",c:"PNG & Graphics",ty:"PNG",sz:"25 MB",col:"#0ea5e9",url:""},{id:3,t:"Lightroom Presets",c:"Templates & Presets",ty:"ZIP",sz:"12 MB",col:"#1d4ed8",url:""},{id:4,t:"ZArchiver Pro",c:"Android Tools",ty:"APK",sz:"8 MB",col:"#15803d",url:""},{id:5,t:"Alight Motion Pro",c:"Apps & Software",ty:"APK",sz:"32 MB",col:"#0f766e",url:""},{id:6,t:"PixelLab Premium",c:"Apps & Software",ty:"APK",sz:"20 MB",col:"#2563eb",url:""},{id:7,t:"Nature Wallpaper 4K",c:"Wallpaper & Themes",ty:"PNG",sz:"12 MB",col:"#b45309",url:""},{id:8,t:"Kinemaster Pro",c:"Video & Audio",ty:"APK",sz:"64 MB",col:"#e11d2e",url:""},{id:9,t:"Fonts Collection",c:"Fonts & Icons",ty:"Font",sz:"8 MB",col:"#7c3aed",url:""},{id:10,t:"Editing Tutorial Series",c:"Tutorials",ty:"MP4",sz:"120 MB",col:"#be185d",url:""}];
 const $=s=>document.querySelector(s),ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const I=n=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`,IC={"Apps & Software":"apps","PNG & Graphics":"image","Video & Audio":"video","Android Tools":"android","Editing Resources":"crown","Wallpaper & Themes":"wallpaper","Fonts & Icons":"font","Tutorials":"book","Blog & Tech News":"news","Templates & Presets":"template"};
-const CL={apps:"#2563eb",image:"#ef4444",video:"#e11d2e",android:"#22a559",crown:"#e11d2e",wallpaper:"#f97316",font:"#7c3aed",book:"#0ea5e9",news:"#0891b2",template:"#db2777"};
-let cat="All",mode="home",lim=8,saved=ls("saved",[]),recent=ls("recent",[]),dls=ls("dls",[]);
-function toast(m){const t=$("#toast");t.textContent=m;t.className="glass s";clearTimeout(t._);t._=setTimeout(()=>t.className="glass",2200)}
-function theme(){const d=document.documentElement,n=(d.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))=="dark"?"light":"dark";d.dataset.theme=n;try{localStorage.setItem("theme",n)}catch(e){}}
-try{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}
-function setCat(c){cat=c;mode="home";lim=8;render();$("#res").scrollIntoView()}
-function view(m){mode=m;lim=8;if(m=="home")cat="All";render();scrollTo({top:0,behavior:"smooth"})}
-function clr(){if(mode=="recent"){recent=[];sv("recent",[])}else if(mode=="dl"){dls=[];sv("dls",[])}else{saved=[];sv("saved",[])}toast("মুছে ফেলা হয়েছে");render()}
-function save(id){try{navigator.vibrate(10)}catch(e){}const i=saved.indexOf(id);i<0?saved.push(id):saved.splice(i,1);sv("saved",saved);toast(i<0?"Saved করা হয়েছে":"Unsaved");render()}
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";"),hs=s=>{let h=7;for(const c of String(s))h=(h*31+c.charCodeAt(0))>>>0;return h%2147483000+1};
+const I=n=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`,ok=u=>/^https:\/\//.test(u||"")?u:"";
+const CC={"Apps & Software":"#ef3b4f","PNG & Graphics":"#8b5cf6","Video & Audio":"#f97316","Android Tools":"#22a559","Editing Resources":"#e11d2e","Wallpaper & Themes":"#16a34a","Fonts & Icons":"#2563eb","Tutorials":"#0ea5e9","Blog & Tech News":"#0891b2","Templates & Presets":"#db2777"};
+const SC=[["Apps","Apps & Software","grid"],["PNG","PNG & Graphics","image"],["Fonts","Fonts & Icons","font"],["Wallpapers","Wallpaper & Themes","wall"],["Video","Video & Audio","video"]];
+const S=[["CapCut Pro APK","Apps & Software","APK","66 MB"],["PNG Pack (HD)","PNG & Graphics","PNG","25 MB"],["Lightroom Presets","Templates & Presets","ZIP","12 MB"],["ZArchiver Pro","Android Tools","APK","8 MB"],["Alight Motion Pro","Apps & Software","APK","32 MB"],["PixelLab Premium","Apps & Software","APK","20 MB"],["Nature Wallpaper 4K","Wallpaper & Themes","PNG","12 MB"],["Kinemaster Pro","Video & Audio","APK","64 MB"],["Fonts Collection","Fonts & Icons","Font","8 MB"],["Editing Tutorial Series","Tutorials","MP4","120 MB"]];
+const SAMPLE=S.map((x,i)=>({id:i+1,t:x[0],c:x[1],ty:x[2],sz:x[3],col:CC[x[1]],url:"",d:"",ver:"",lic:"",img:""})),R=SAMPLE.slice();
+let cat="All",mode="home",lim=8,saved=ls("saved",[]),recent=ls("recent",[]),dls=ls("dls",[]),sb=null,real=false;
+const SB_URL="https://ytyqialoqckxfjcpkask.supabase.co",SB_KEY="sb_publishable_V-UOu6hCBLsWczZgR_vScA_mr-RlwNt";
+function toast(m){const t=$("#toast");t.textContent=m;t.className="glass s";clearTimeout(t._);t._=setTimeout(()=>t.className="glass",2400)}
+function theme(){const d=document.documentElement,n=d.dataset.theme=="dark"?"light":"dark";d.dataset.theme=n;try{localStorage.setItem("theme",n)}catch(e){}}
+function go(){view("explore");$("#res").scrollIntoView({behavior:"smooth"})}
+function setCat(c){cat=cat==c?"All":c;mode="explore";lim=8;render()}
+function view(m){mode=m;lim=8;if(m=="home")cat="All";if(m=="home"||m=="explore"){}else $("#q").value="";render();scrollTo({top:0,behavior:"smooth"})}
+function save(id){try{navigator.vibrate(10)}catch(e){}const i=saved.indexOf(id);i<0?saved.push(id):saved.splice(i,1);sv("saved",saved);toast(i<0?"Saved":"Removed");render();if($("#sh2").classList.contains("s")&&$("#sh2").dataset.k=="d")show(id,1)}
 function dl(id){const r=R.find(x=>x.id==id);if(!r.url){toast("এই ফাইলের আসল লিংক এখনো যোগ করা হয়নি");return}dls=[id,...dls.filter(x=>x!=id)].slice(0,30);sv("dls",dls);const a=document.createElement("a");a.href=r.url;a.download=r.t;a.rel="noopener";document.body.appendChild(a);a.click();a.remove();render()}
-function open_(id){recent=[id,...recent.filter(x=>x!=id)].slice(0,20);sv("recent",recent);toast(R.find(x=>x.id==id).t+" – "+R.find(x=>x.id==id).c)}
-const card=(r,i)=>`<article class="card" style="animation-delay:${i*40}ms"><div class="th" style="--tc:${r.col}" onclick="show(${r.id})">${r.img?`<img src="${r.img}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`:`<span class="logo2">${r.t[0]}</span>`}</div><div class="cb"><h3 style="cursor:pointer" onclick="show(${r.id})">${r.t}</h3><span class="tg">${r.ty}</span><span class="tg" style="background:#0001;color:var(--mut)">${r.c.split(" ")[0]}</span><div class="meta">${r.sz}</div><div class="row"><button class="btn" onclick="dl(${r.id})">Download</button><button class="heart ${saved.includes(r.id)?"on":""}" aria-label="Save" onclick="save(${r.id})">${I("heart")}</button></div></div></article>`;
+const card=(r,i)=>`<article class="cd" style="animation-delay:${i*40}ms;--c:${r.col}"><button class="bk ${saved.includes(r.id)?"on":""}" aria-label="Save" onclick="save(${r.id})">${I("bookmark")}</button><div class="ic2" onclick="show(${r.id})">${r.img?`<img src="${r.img}" alt="" loading="lazy">`:`<span>${r.t[0]}</span>`}</div><h3>${r.t}</h3><small>${r.c.split(" ")[0]}</small><div class="mt">${I("android")}${r.ver?r.ver+" • ":""}${r.sz}</div><button class="dlb" onclick="dl(${r.id})">${I("download")} Download</button></article>`;
 function render(){const q=$("#q").value.trim().toLowerCase(),ft=$("#ft").value;let l=R;
 if(mode=="saved")l=saved.map(i=>R.find(r=>r.id==i));else if(mode=="recent")l=recent.map(i=>R.find(r=>r.id==i));else if(mode=="dl")l=dls.map(i=>R.find(r=>r.id==i));
-l=l.filter(r=>(cat=="All"||r.c==cat)&&(!ft||r.ty==ft)&&(!q||(r.t+" "+r.c+" "+r.ty).toLowerCase().includes(q)));
-document.body.dataset.m=mode;[...document.querySelectorAll(".bn button")].forEach((b,i)=>b.classList.toggle("on",i==({home:0,saved:1,dl:2}[mode]??-1)));$("#rt").innerHTML={saved:I("heart")+" My Saved",recent:I("clock")+" Recent Views",dl:I("download")+" Downloads",home:cat=="All"?I("star")+" Featured Resources":cat}[mode];
-$("#grid").innerHTML=l.slice(0,lim).map(card).join("")||`<div class="empty" style="grid-column:1/-1">${I("inbox")}কিছু পাওয়া যায়নি${mode!="home"?" – এখনো কিছু যোগ হয়নি":""}</div>`;
-$("#more").style.display=l.length>lim?"block":"none";
-$("#cats").innerHTML=CATS.map(c=>`<button class="cat ${cat==c[0]?"on":""}" onclick="setCat('${c[0]}')"><i><span class="tile" style="--tg:${CL[IC[c[0]]]};--tc:${CL[IC[c[0]]]}">${I(IC[c[0]])}</span></i>${c[0]}</button>`).join("");
-$("#nav").innerHTML=["Home",...CATS.slice(0,8).map(c=>c[0])].map(n=>`<a href="#" class="${(n=="Home"&&cat=="All"&&mode=="home")||n==cat?"on":""}" onclick="${n=="Home"?"cat='All';view('home')":"setCat('"+n+"')"};return false">${I(IC[n]||"home")}${n}</a>`).join("");
-$("#chips").innerHTML=["Editing","PNG","App","Wallpaper","Tutorial"].map(c=>`<button class="chip" onclick="q.value='${c}';render()"># ${c}</button>`).join("");
-const mini=r=>`<div class="li" onclick="show(${r.id})"><span class="ic" style="background:${r.col}">${r.t[0]}</span><div>${r.t}<small>${r.ty} · ${r.sz}</small></div></div>`;
-$("#lat").innerHTML=R.slice().reverse().slice(0,6).map(card).join("");$("#pop").innerHTML=R.slice(0,5).map(mini).join("");
-$("#side").innerHTML=saved.length?saved.slice(0,5).map(i=>mini(R.find(r=>r.id==i))).join(""):`<div class="empty">${I("heart")}এখনো কিছু সেভ করা হয়নি</div>`}
-const TY={APK:"ডাউনলোড শেষে ফাইলটি খুলে ইনস্টল করুন। দরকার হলে Settings থেকে 'Install unknown apps' অনুমতি দিন।",ZIP:"ZIP ফাইল Extract করে ভেতরের ফাইল ব্যবহার করুন।",PNG:"ছবিটি Downloads বা Gallery থেকে সরাসরি ব্যবহার করুন।",MP4:"যেকোনো ভিডিও প্লেয়ারে চালান।",Font:"ফন্ট ইনস্টল করে এডিটিং অ্যাপে ব্যবহার করুন।"};
-function skel(){$("#grid").innerHTML=Array(4).fill('<div class="card sk"></div>').join("")}
-function hide(){$("#sh2").classList.remove("s");$("#ov").classList.remove("s")}
-function sh(id){const r=R.find(x=>x.id==id),u=location.href;try{navigator.share?navigator.share({title:r.t,url:u}):navigator.clipboard.writeText(u).then(()=>toast("লিংক কপি হয়েছে"))}catch(e){toast("শেয়ার করা যায়নি")}}
-function show(id){const r=R.find(x=>x.id==id);recent=[id,...recent.filter(x=>x!=id)].slice(0,20);sv("recent",recent);
-const rel=R.filter(x=>x.c==r.c&&x.id!=id).slice(0,3).map(x=>`<div class="li" onclick="show(${x.id})"><span class="ic" style="background:${x.col}">${x.t[0]}</span><div>${x.t}<small>${x.ty} · ${x.sz}</small></div></div>`).join("")||`<div class="empty">এই ক্যাটাগরিতে আর কিছু নেই</div>`;
-const s=saved.includes(id);
-$("#sh2").innerHTML=`<button class="ib" style="float:right" aria-label="Close" onclick="hide()">${I("x")}</button><div style="display:flex;gap:14px;align-items:center"><span class="logo2" style="--tc:${r.col}">${r.t[0]}</span><div><h2 style="font-size:19px">${r.t}</h2><span class="tg">${r.ty}</span><span class="tg">${r.c}</span></div></div><div class="ig"><div><small>ফাইল টাইপ</small>${r.ty}</div><div><small>সাইজ</small>${r.sz}</div><div><small>ভার্সন</small>${r.ver||"শীঘ্রই যোগ হবে"}</div><div><small>Compatibility</small>${r.ty=="APK"?"Android":"সব ডিভাইস"}</div></div>${r.d?`<p style="font-size:14px;margin-bottom:10px">${r.d}</p>`:""}<p style="font-size:14px;margin-bottom:10px"><b>ব্যবহারের নিয়ম:</b> ${TY[r.ty]||""}</p><p style="font-size:13px;color:var(--mut);margin-bottom:14px">${I("shield")} লাইসেন্স/সোর্স: ${r.lic||"শীঘ্রই যোগ হবে"}। শুধু অফিশিয়াল ও অনুমোদিত ফাইল দেওয়া হয়।</p><div class="row"><button class="btn" onclick="dl(${id})">${I("download")} Download</button><button class="heart ${s?"on":""}" aria-label="Save" onclick="save(${id});show(${id})">${I("heart")}</button><button class="heart" aria-label="Share" onclick="sh(${id})">${I("share")}</button></div><h3 style="margin:16px 0 6px;font-size:15px">Related Resources</h3>${rel}`;
-$("#sh2").classList.add("s");$("#ov").classList.add("s");render()}
-addEventListener("keydown",e=>{if(e.key=="Escape")hide();if(e.key=="/"&&document.activeElement.tagName!="INPUT"){e.preventDefault();$("#q").focus()}});
-const SAMPLE=R.slice();let DB=null,ADM=false,FB=[],AO=false,EK=null,IMG="",DEL=null;
-const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";"),hs=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h%2147483000+1};
-const SB_URL="https://ytyqialoqckxfjcpkask.supabase.co",SB_KEY="sb_publishable_V-UOu6hCBLsWczZgR_vScA_mr-RlwNt";let sb=null;
-function fromRow(x){const c=CATS.some(v=>v[0]==x.category)?x.category:CATS[0][0],ok=u=>/^https:\/\//.test(u||"")?u:"";return{id:hs(x.id),k:x.id,t:esc(x.title||"Untitled"),c,ty:esc(x.file_type||"APK"),sz:esc(x.file_size),col:CL[IC[c]]||"#e11d2e",url:ok(x.file_url),d:esc(x.description),ver:esc(x.version),lic:esc(x.license),img:ok(x.preview_url),feat:!!x.featured}}
-async function boot(){try{sb=supabase.createClient(SB_URL,SB_KEY);
-if(!sessionStorage.getItem("v")){sessionStorage.setItem("v","1");sb.from("visits").insert({}).then(()=>{})}
-const{data}=await sb.from("resources").select("*").eq("published",true).order("created_at",{ascending:true});
-if(data&&data.length){R.length=0;R.push(...data.map(fromRow));render()}
-const{data:{session}}=await sb.auth.getSession();const u=session&&session.user;
-if(u&&!localStorage.getItem("pv")){localStorage.setItem("pv","1");const m=u.user_metadata||{};sb.from("profile_views").insert({name:m.full_name||m.name||"",avatar_url:m.avatar_url||m.picture||""}).then(()=>{})}}catch(e){}}
-function gsign(){if(!sb)return toast("\u098f\u0996\u09a8 \u09b8\u09ae\u09cd\u09ad\u09ac \u09a8\u09af\u09bc");sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}})}
-function menu(){const L=[["About Us","book"],["Contact (WhatsApp)","whatsapp","https://wa.me/8801919565199"],["Privacy Policy","shield"],["Terms & Conditions","news"],["Copyright / DMCA","shield"]];
-$("#sh2").innerHTML=`<button class="ib" style="float:right" aria-label="Close" onclick="hide()">${I("x")}</button><h2 style="font-size:19px;margin-bottom:12px">Menu</h2><div class="cats" style="display:grid;grid-template-columns:repeat(3,1fr)">${CATS.map(c=>`<button class="cat" style="min-width:0" onclick="hide();setCat('${c[0]}')"><i><span class="tile" style="--tg:${CL[IC[c[0]]]};--tc:${CL[IC[c[0]]]}">${I(IC[c[0]])}</span></i>${c[0]}</button>`).join("")}</div><div style="margin-top:12px">${L.map(l=>l[2]?`<a class="li" href="${l[2]}" target="_blank" rel="noopener"><span class="ic" style="background:#22a559">${I(l[1])}</span>${l[0]}</a>`:`<div class="li" onclick="toast('এই পেজ শীঘ্রই আসছে')"><span class="ic" style="background:var(--red)">${I(l[1])}</span>${l[0]}</div>`).join("")}<div class="li" onclick="hide();view('recent')"><span class="ic" style="background:#f97316">${I("clock")}</span>Recent Views</div><div class="li" onclick="gsign()"><span class="ic" style="background:#2563eb">${I("shield")}</span>Google \u09a6\u09bf\u09af\u09bc\u09c7 \u09b8\u09be\u0987\u09a8 \u0987\u09a8 (\u0990\u099a\u09cd\u099b\u09bf\u0995)</div><div class="li" onclick="theme()"><span class="ic" style="background:#333">${I("moon")}</span>Dark / Light mode</div></div><div class="soc" style="margin-top:14px"><a href="https://youtube.com/@tmh-technology" target="_blank" rel="noopener" aria-label="YouTube">${I("youtube")}</a><a href="https://t.me/TMHTechnology" target="_blank" rel="noopener" aria-label="Telegram">${I("send")}</a><a href="https://www.tiktok.com/@tmhtechnology" target="_blank" rel="noopener" aria-label="TikTok">${I("tiktok")}</a><a href="https://wa.me/8801919565199" target="_blank" rel="noopener" aria-label="WhatsApp">${I("whatsapp")}</a></div><p style="font-size:12px;color:var(--mut);margin-top:12px">© 2026 TMH Technology</p>`;
-$("#sh2").classList.add("s");$("#ov").classList.add("s")}
-render();skel();setTimeout(render,450);boot();
+l=l.filter(r=>r&&(cat=="All"||r.c==cat)&&(!ft||r.ty==ft)&&(!q||(r.t+" "+r.c+" "+r.ty).toLowerCase().includes(q)));
+if(mode=="home"&&cat=="All"&&!q&&l.some(r=>r.feat))l=l.filter(r=>r.feat);
+document.body.dataset.m=mode;["home","explore","dl"].forEach(k=>$("#n-"+k).classList.toggle("on",k==mode));
+$("#rt").innerHTML={home:I("star")+" Featured Resources",explore:I("compass")+" "+(cat=="All"?"Explore":esc(cat)),saved:I("bookmark")+" My Saved",recent:I("clock")+" Recent Views",dl:I("download")+" Downloads"}[mode];
+$("#ft").style.display=mode=="home"?"none":"block";$("#va").style.display=mode=="home"?"inline":"none";
+const sh=mode=="home"?l.slice(0,10):l.slice(0,lim);
+$("#grid").innerHTML=sh.map(card).join("")||`<div class="empty">${I("inbox")}কিছু পাওয়া যায়নি${mode!="home"&&mode!="explore"?" – এখনো কিছু যোগ হয়নি":""}</div>`;
+$("#more").style.display=mode!="home"&&l.length>lim?"block":"none";
+$("#cs").innerHTML=SC.map(c=>`<button class="ct ${cat==c[1]?"on":""}" onclick="setCat('${c[1]}')"><span class="tile" style="--c:${CC[c[1]]}">${I(c[2])}</span>${c[0]}</button>`).join("");
+const nw=R.slice().reverse();$("#lat").innerHTML=nw.slice(0,6).map(card).join("");
+$("#tt").innerHTML=real&&nw[0]?nw[0].t:"TMH Technology";
+$("#dot").style.display=real&&nw[0]&&ls("seen",0)!=nw[0].id?"block":"none"}
+function open_(h){$("#sh2").innerHTML=h;$("#sh2").classList.add("s");$("#ov").classList.add("s")}
+function hide(){$("#sh2").classList.remove("s");$("#ov").classList.remove("s");$("#sh2").dataset.k=""}
+const head=t=>`<div class="sx"><h2>${t}</h2><button class="xb" aria-label="Close" onclick="hide()">${I("x")}</button></div>`;
+const TY={APK:"ডাউনলোড শেষে ফাইলটি খুলে ইনস্টল করুন। প্রয়োজন হলে Settings থেকে 'Install unknown apps' অনুমতি দিন।",ZIP:"ZIP ফাইল Extract করে ভেতরের ফাইল ব্যবহার করুন।",PNG:"ছবিটি Downloads বা Gallery থেকে সরাসরি ব্যবহার করুন।",MP4:"যেকোনো ভিডিও প্লেয়ারে চালান।",Font:"ফন্ট ইনস্টল করে এডিটিং অ্যাপে ব্যবহার করুন।"};
+function show(id,keep){const r=R.find(x=>x.id==id);if(!r)return;if(!keep){recent=[id,...recent.filter(x=>x!=id)].slice(0,20);sv("recent",recent)}
+const rel=R.filter(x=>x.c==r.c&&x.id!=id).slice(0,3).map(x=>`<div class="li" onclick="show(${x.id})"><div>${x.t}<small>${x.ty} · ${x.sz}</small></div></div>`).join("")||`<div class="empty">এই ক্যাটাগরিতে আর কিছু নেই</div>`;
+open_(head(r.t)+`<span class="tile" style="--c:${r.col};width:64px;height:64px;margin:0 0 10px">${r.img?`<img src="${r.img}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:15px">`:`<b style="font-size:28px">${r.t[0]}</b>`}</span><div class="ig"><div><small>ফাইল টাইপ</small>${r.ty}</div><div><small>সাইজ</small>${r.sz||"-"}</div><div><small>ভার্সন</small>${r.ver||"শীঘ্রই"}</div><div><small>Compatibility</small>${r.ty=="APK"?"Android":"সব ডিভাইস"}</div></div>${r.d?`<p class="t">${r.d}</p>`:""}<p class="t"><b>ব্যবহারের নিয়ম:</b> ${TY[r.ty]||""}</p><p class="t" style="color:var(--mut);font-size:13px">${I("shield")} লাইসেন্স/সোর্স: ${r.lic||"শীঘ্রই যোগ হবে"}। শুধু অফিশিয়াল ও অনুমোদিত ফাইল।</p><div class="row"><button class="btn" onclick="dl(${id})">${I("download")} Download</button><button class="sq ${saved.includes(id)?"on":""}" aria-label="Save" onclick="save(${id})">${I("bookmark")}</button><button class="sq" aria-label="Share" onclick="shr(${id})">${I("share")}</button></div><h3 style="margin:16px 0 6px;font-size:15px">Related Resources</h3>${rel}`);$("#sh2").dataset.k="d"}
+function shr(id){const r=R.find(x=>x.id==id),u=location.href;try{navigator.share?navigator.share({title:r.t,url:u}):navigator.clipboard.writeText(u).then(()=>toast("লিংক কপি হয়েছে"))}catch(e){toast("শেয়ার করা যায়নি")}}
+const mi=(ic,t,s,f,x)=>`<button class="mi" onclick="${f}">${I(ic)}<span><b>${t}</b><small>${s}</small></span>${x||""}</button>`;
+function menu(){open_(head("More Features")+`<div class="mg">${mi("compass","Explore","Browse Resources","hide();view('explore')")}${mi("set","Settings","App Settings","settings()")}${mi("download","Downloads","Your Downloads","hide();view('dl')")}${mi("info","About Us","Know About TMH","info('about')")}${mi("bookmark","My Saved","Saved Resources","hide();view('saved')")}${mi("mail","Contact Us","Get in Touch","info('contact')")}${mi("clock","Recent Views","Recently Viewed","hide();view('recent')")}${mi("shield","Terms &amp; Conditions","Terms &amp; Legal","info('terms')")}${mi("shield","Privacy Policy","Your Privacy is Our Priority","info('privacy')")}${mi("moon","Dark Mode","Switch Theme","theme()",'<i class="tg2"></i>')}</div>`)}
+const L=(h,ic,t)=>`<a class="li" href="${h}" target="_blank" rel="noopener">${I(ic)}<div>${t}</div></a>`;
+function info(k){const T={about:["About Us",`<p class="t">TMH Technology একটি বাংলা টেক রিসোর্স প্ল্যাটফর্ম। এখানে অ্যাপ, PNG, ফন্ট, ওয়ালপেপার, টেমপ্লেট ও এডিটিং রিসোর্স এক জায়গায় পাবেন।</p><p class="t">আমরা শুধু নিজের তৈরি, অনুমতিপ্রাপ্ত বা বৈধভাবে বিতরণযোগ্য ফাইল দিই। পেইড বা ক্র্যাকড সফটওয়্যার বিতরণ করা হয় না।</p>`],contact:["Contact Us",L("https://wa.me/8801919565199","wa","WhatsApp: 01919565199")+L("https://t.me/TMHTechnology","send","Telegram")+L("https://youtube.com/@tmh-technology","yt","YouTube")+L("https://www.tiktok.com/@tmhtechnology","tt","TikTok")],terms:["Terms &amp; Conditions",`<p class="t">১. এই সাইটের ফাইল শুধু বৈধ ও ব্যক্তিগত ব্যবহারের জন্য।</p><p class="t">২. ফাইল ব্যবহারের দায়িত্ব ব্যবহারকারীর। ডাউনলোডের আগে লাইসেন্স দেখে নিন।</p><p class="t">৩. কপিরাইট নিয়ে আপত্তি থাকলে Contact Us-এ জানান, যাচাই করে ফাইল সরানো হবে।</p>`],privacy:["Privacy Policy",`<p class="t">লগইন ছাড়াই সাইট ব্যবহার করা যায়। Saved, Recent ও Downloads তালিকা আপনার ফোনের ব্রাউজারেই থাকে।</p><p class="t">সাইটে ঢোকার সংখ্যা নাম ছাড়া গোনা হয়। Google সাইন-ইন ঐচ্ছিক; করলে আপনার নাম ও ছবি প্রোফাইল ভিউ হিসেবে মালিক দেখতে পারেন।</p>`]}[k];open_(head(T[0])+T[1])}
+function settings(){open_(head("Settings")+`<div class="mg">${mi("moon","Dark Mode","Switch Theme","theme()",'<i class="tg2"></i>')}${mi("bookmark","Clear Saved","Remove all","saved=[];sv('saved',[]);render();toast('মুছে ফেলা হয়েছে')")}${mi("clock","Clear Recent","Remove all","recent=[];sv('recent',[]);render();toast('মুছে ফেলা হয়েছে')")}${mi("download","Clear Downloads","Remove history","dls=[];sv('dls',[]);render();toast('মুছে ফেলা হয়েছে')")}</div>`)}
+async function profile(){let u=null;try{if(sb){const r=await sb.auth.getSession();u=r.data.session&&r.data.session.user}}catch(e){}const m=(u&&u.user_metadata)||{};
+open_(head("Profile")+`<div class="li">${m.avatar_url&&ok(m.avatar_url)?`<img src="${esc(m.avatar_url)}" alt="" width="46" height="46" style="border-radius:50%" referrerpolicy="no-referrer">`:I("user")}<div>${u?esc(m.full_name||m.name||"Signed in"):"Guest"}<small>${u?"Google দিয়ে সাইন ইন করা":"লগইন ছাড়াই সব ব্যবহার করা যায়"}</small></div></div><div class="mg">${u?mi("x","Sign out","","outg()"):mi("user","Google Sign-in","Optional","gsign()")}${mi("bookmark","My Saved",saved.length+" items","hide();view('saved')")}${mi("clock","Recent Views","","hide();view('recent')")}${mi("set","Settings","","settings()")}</div>`)}
+function gsign(){if(!sb)return toast("এখন সম্ভব নয়");sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}}).then(r=>{if(r.error)toast("Google সাইন-ইন এখনো চালু করা হয়নি")})}
+async function outg(){try{await sb.auth.signOut()}catch(e){}hide();toast("Sign out হয়েছে")}
+function note(){const nw=R.slice().reverse().slice(0,5);if(real&&nw[0])sv("seen",nw[0].id);open_(head("Announcements")+(real&&nw.length?nw.map(r=>`<div class="li" onclick="show(${r.id})">${I("bell")}<div>নতুন: ${r.t}<small>${r.c}</small></div></div>`).join(""):`<div class="empty">${I("bell")}নতুন কোনো আপডেট নেই</div>`));render()}
+function fromRow(x){const c=CC[x.category]?x.category:"Apps & Software";return{id:hs(x.id),t:esc(x.title||"Untitled"),c,ty:esc(x.file_type||"APK"),sz:esc(x.file_size),col:CC[c],url:ok(x.file_url),d:esc(x.description),ver:esc(x.version),lic:esc(x.license),img:ok(x.preview_url),feat:!!x.featured}}
+async function boot(){try{sb=supabase.createClient(SB_URL,SB_KEY);if(!sessionStorage.getItem("v")){sessionStorage.setItem("v","1");sb.from("visits").insert({}).then(()=>{})}
+const{data}=await sb.from("resources").select("*").eq("published",true).order("created_at",{ascending:true});if(data&&data.length){real=true;R.length=0;R.push(...data.map(fromRow));render()}
+const s=(await sb.auth.getSession()).data.session,u=s&&s.user;if(u&&!localStorage.getItem("pv")){localStorage.setItem("pv","1");const m=u.user_metadata||{};sb.from("profile_views").insert({name:m.full_name||m.name||"",avatar_url:m.avatar_url||m.picture||""}).then(()=>{})}}catch(e){}}
+addEventListener("keydown",e=>{if(e.key=="Escape")hide()});
+const AD={yt:""};/* own YouTube video ID (11 characters) for the phone slot; leave empty for ad placeholder */
+(function(){const a=$("#ad");if(a&&/^[\w-]{11}$/.test(AD.yt)){a.innerHTML=`<em>Promo</em><a href="https://www.youtube.com/watch?v=${AD.yt}" target="_blank" rel="noopener" aria-label="Watch video" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;background:url(https://i.ytimg.com/vi/${AD.yt}/hqdefault.jpg) center/cover"><span class="yp"><svg class="i" style="fill:#fff;stroke:#fff"><use href="#i-play"/></svg></span></a>`}})();
+render();boot();
 </script></body></html>
